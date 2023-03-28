@@ -4,8 +4,8 @@
 For this project, you will create an animal training management app! Your job for the app, is to build out backend functionality to manage different users, animals, and training logs. Schemas for these data models can be found in `Schemas.md`
 
 ## Submission
-- Present your final project during lecture on 3/13/2023
-- **Due: 3/13/2023**
+- Present your final project during lecture on 4/13/2023
+- **Due: 4/13/2023**
 
 ## Getting Started
 - Fork this repository into your own account
@@ -16,14 +16,14 @@ For this project, you will create an animal training management app! Your job fo
 - To test your API we recommend using [Postman](https://www.postman.com)
 
 ## Level 0: Setup
-- (0) Setup a MongoDB database
+- (0) Setup a MongoDB database - **Johannes**
 - (1) Create a GET endpoint at `/api/health` to test whether your API server is functioning and healthy
-    - This can return a JSON with `{"healthy": true}`
+    - This can return a JSON with `{"healthy": true}` - 
 
 ## Level 1: Easy
-- (2) Create a POST endpoint at `/api/user` to create a user in the database based on information passed into the body
-- (3) Create a POST endpoint at `/api/animal` to create an animal in the database based on information passed into the body
-- (4) Create a POST endpoint at `/api/training` to create a training log in the database based on information passed into the body
+- (2) Create a POST endpoint at `/api/user` to create a user in the database based on information passed into the body - 
+- (3) Create a POST endpoint at `/api/animal` to create an animal in the database based on information passed into the body - 
+- (4) Create a POST endpoint at `/api/training` to create a training log in the database based on information passed into the body - 
 - Note these requests will have a similar request body and response statuses:
     - Body: A JSON containing the user/animal/training log information for the user/animal/training log we want to create
     - Response:
