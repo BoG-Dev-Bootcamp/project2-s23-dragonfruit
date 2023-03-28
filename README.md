@@ -21,7 +21,7 @@ For this project, you will create an animal training management app! Your job fo
     - This can return a JSON with `{"healthy": true}` - **Johannes**
 
 ## Level 1: Easy
-- (2) Create a POST endpoint at `/api/user` to create a user in the database based on information passed into the body - **Justin**
+- (2) Create a POST endpoint at `/api/user` to create a user in the database based on information passed into the body - **Johannes**
 - (3) Create a POST endpoint at `/api/animal` to create an animal in the database based on information passed into the body - **Pennon**
 - (4) Create a POST endpoint at `/api/training` to create a training log in the database based on information passed into the body - **Parker**
 - Note these requests will have a similar request body and response statuses:
