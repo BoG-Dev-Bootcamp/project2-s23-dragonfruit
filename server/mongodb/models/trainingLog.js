@@ -30,7 +30,6 @@ const trainingLogSchema = new mongoose.Schema({
     trainingLogVideo: {
         type: String
     }
-
 })
 
 export default mongoose.model("Training Log", trainingLogSchema)

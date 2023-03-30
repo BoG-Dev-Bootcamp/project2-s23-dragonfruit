@@ -25,8 +25,6 @@ const animalSchema = new mongoose.Schema({
     profilePicture: {
         type: String
     }
-
-
 })
 
 export default mongoose.model("Animal", animalSchema)
