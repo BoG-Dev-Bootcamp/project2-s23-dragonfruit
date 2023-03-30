@@ -14,7 +14,8 @@ const animalSchema = new mongoose.Schema({
         required: true
     },
     owner: {
-        type: Object,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     dateOfBirth: {
