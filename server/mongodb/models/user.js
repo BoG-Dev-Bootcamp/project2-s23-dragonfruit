@@ -1,10 +1,6 @@
 import mongoose from "mongoose"
 
 const userSchema = new mongoose.Schema({
-    _id: {
-        type: Object,
-        required: true
-    },
     firstName: {
         type: String,
         required: true
@@ -22,12 +18,11 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     animalArray: {
-        type: [mongoose.Schema.Types.ObjectId],
-        required: true,
+        type: [mongoose.Schema.Types.ObjectId]
     },
     profilePicture: {
         type: String
     }
 })
 
-export default mongoose.model("User", userSchema)
+module.exports = (mongoose.models.User ||  mongoose.model('User', userSchema))
