@@ -1,6 +1,6 @@
-import axios from 'axios'
 import animal from '../../../../server/mongodb/models/animal.js'
 import animalSchema from "../../../../server/mongodb/models/trainingLog.js"
+import { closeDB } from '../../../../server/utils/db.js';
 
 export default async function handler(req, res) {
 
@@ -14,9 +14,12 @@ export default async function handler(req, res) {
     }
 
     try {
+        await connectDB()
         let newAnimal = new animalSchema(newAnimalSchemaData);
         await newAnimal.save();
+        await closeDB()
         return res.status(200)
+
     } catch (error) {
         return res.status(400)
     }
