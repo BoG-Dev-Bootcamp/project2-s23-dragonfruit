@@ -53,7 +53,7 @@ For this project, you will create an animal training management app! Your job fo
 - (11) Create a POST endpoint at `/api/user/login` that accepts an email and password and tests whether the password is valid for the given email.
     - Response:
         - **Status 200 (Success):** If the email/password combo is valid
-        - **Status 403**: If the email password combo is invalid **Johannes**
+        - **Status 403**: If the email password combo is invalid 
 - (12) We are going to make our application even more secure by adding JSON Web Token (JWT) functionality to secure our endpoints. Create a POST endpoint at `/api/user/verify` that issues a JSON Web Token to the user if they issue the correct email/password combination.
     - Response:
         - **Status 200 (Success):** If the email/password combo is valid + issue a JWT that includes the entirety of their profile information
