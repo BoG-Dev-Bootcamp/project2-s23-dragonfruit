@@ -16,14 +16,14 @@ For this project, you will create an animal training management app! Your job fo
 - To test your API we recommend using [Postman](https://www.postman.com)
 
 ## Level 0: Setup
-- (0) Setup a MongoDB database - **Johannes**
+- (0) Setup a MongoDB database - **Complete**
 - (1) Create a GET endpoint at `/api/health` to test whether your API server is functioning and healthy
-    - This can return a JSON with `{"healthy": true}` - **Johannes**
+    - This can return a JSON with `{"healthy": true}` - **Complete**
 
 ## Level 1: Easy
-- (2) Create a POST endpoint at `/api/user` to create a user in the database based on information passed into the body - **Johannes**
+- (2) Create a POST endpoint at `/api/user` to create a user in the database based on information passed into the body - **Complete**
 - (3) Create a POST endpoint at `/api/animal` to create an animal in the database based on information passed into the body - **Pennon**
-- (4) Create a POST endpoint at `/api/training` to create a training log in the database based on information passed into the body - **Parker**
+- (4) Create a POST endpoint at `/api/training` to create a training log in the database based on information passed into the body - **Complete**
 - Note these requests will have a similar request body and response statuses:
     - Body: A JSON containing the user/animal/training log information for the user/animal/training log we want to create
     - Response:
@@ -36,9 +36,9 @@ For this project, you will create an animal training management app! Your job fo
     - Response:
         - **Status 400:** If the training log animal is not owned by specified user
 - We want to add admin functionality to this backend API to allow the admins to view all the data in the database
-    - (6) Create a GET endpoint at `/api/admin/users` which will return all of the users in the database (not with their passwords) - **Johannes**
-    - (7) Create a GET endpoint at `/api/admin/animals` which will return all of the animals in the database - **Pennon**
-    - (8) Create a GET endpoint at `/api/admin/training` which will return all of the training logs in the database - **Justin**
+    - (6) Create a GET endpoint at `/api/admin/users` which will return all of the users in the database (not with their passwords) - **Complete**
+    - (7) Create a GET endpoint at `/api/admin/animals` which will return all of the animals in the database - **Complete**
+    - (8) Create a GET endpoint at `/api/admin/training` which will return all of the training logs in the database - **Complete**
     - Response:
         - **Status 200 (Success):** If we are able to retrieve the users/animals/training logs
         - **Status 500**: For any other errors
