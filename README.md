@@ -37,13 +37,13 @@ For this project, you will create an animal training management app! Your job fo
         - **Status 400:** If the training log animal is not owned by specified user
 - We want to add admin functionality to this backend API to allow the admins to view all the data in the database
     - (6) Create a GET endpoint at `/api/admin/users` which will return all of the users in the database (not with their passwords) - **Johannes**
-    - (7) Create a GET endpoint at `/api/admin/animals` which will return all of the animals in the database - **Pennon**
-    - (8) Create a GET endpoint at `/api/admin/training` which will return all of the training logs in the database - **Justin**
+    - (7) Create a GET endpoint at `/api/admin/animals` which will return all of the animals in the database - **Johannes**
+    - (8) Create a GET endpoint at `/api/admin/training` which will return all of the training logs in the database - **Johannes**
     - Response:
         - **Status 200 (Success):** If we are able to retrieve the users/animals/training logs
         - **Status 500**: For any other errors
     - **Note:** These endpoints must implement pagination -- ideally using the document IDs or some other property that has natural ordering (i.e. take a look at approach 2 in this [article](https://www.codementor.io/@arpitbhayani/fast-and-efficient-pagination-in-mongodb-9095flbqr))
-- (9) We want to create a resuable middleware function that takes in an `allowedMethods` array of strings i.e. `['POST', 'GET', 'DELETE']` and a `method` string with the current method being used in the request. This function should check if `method` is in `allowedMethods`
+- (9) We want to create a resuable middleware function that takes in an `allowedMethods` array of strings i.e. `['POST', 'GET', 'DELETE']` and a `method` string with the current method being used in the request. This function should check if `method` is in `allowedMethods` **Justin**
 	- Response
 		- **Status 400**: If the request `method` is not in `allowedMethods`
 		- **return NextResponse.next()** - let the request through
@@ -53,7 +53,7 @@ For this project, you will create an animal training management app! Your job fo
 - (11) Create a POST endpoint at `/api/user/login` that accepts an email and password and tests whether the password is valid for the given email.
     - Response:
         - **Status 200 (Success):** If the email/password combo is valid
-        - **Status 403**: If the email password combo is invalid
+        - **Status 403**: If the email password combo is invalid 
 - (12) We are going to make our application even more secure by adding JSON Web Token (JWT) functionality to secure our endpoints. Create a POST endpoint at `/api/user/verify` that issues a JSON Web Token to the user if they issue the correct email/password combination.
     - Response:
         - **Status 200 (Success):** If the email/password combo is valid + issue a JWT that includes the entirety of their profile information

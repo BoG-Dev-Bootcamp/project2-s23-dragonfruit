@@ -1,10 +1,6 @@
 import mongoose from "mongoose"
 
 const trainingLogSchema = new mongoose.Schema({
-    _id: {
-        type: Object,
-        required: true
-    },
     date: {
         type: Date,
         required: true
@@ -32,4 +28,5 @@ const trainingLogSchema = new mongoose.Schema({
     }
 })
 
-export default mongoose.model("Training Log", trainingLogSchema)
+// export default mongoose.model("Training Log", trainingLogSchema)
+module.exports = (mongoose.models.traininglogs ||  mongoose.model('traininglogs', trainingLogSchema))
