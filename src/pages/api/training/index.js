@@ -34,7 +34,9 @@ export default async function handler(request, response) {
         }
 
     } else {
+        /*
         await connectDB()
+
         const trainingLogData = {
             _id: 100,
             date: Date(),
@@ -45,9 +47,13 @@ export default async function handler(request, response) {
             trainingLogVideo: null,
         }
 
-            const newTrainingLog = new trainingLogSchema(trainingLogData)
-            await newTrainingLog.save()
-            await closeDB()
-        return response.send("not post")
+        const newTrainingLog = new trainingLogSchema(trainingLogData)
+        await newTrainingLog.save()
+        await closeDB()
+        */
+        
+        response.status(400);
+
+        return response.send("Please send a post request not a Get request")
     }
 }
