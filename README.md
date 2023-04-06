@@ -49,7 +49,7 @@ For this project, you will create an animal training management app! Your job fo
 		- **return NextResponse.next()** - let the request through
 
 ## Level 3: Hard
-- (10) We want to add user authentication. In the user creation endpoint (1), add code that allows a password to be accepted. Encrypt this password using an encryption library (we recommend using [bcrypt](https://www.npmjs.com/package/bcrypt)) and save it in the database under the user's password field
+- (10) We want to add user authentication. In the user creation endpoint (1), add code that allows a password to be accepted. Encrypt this password using an encryption library (we recommend using [bcrypt](https://www.npmjs.com/package/bcrypt)) and save it in the database under the user's password field - **Complete**
 - (11) Create a POST endpoint at `/api/user/login` that accepts an email and password and tests whether the password is valid for the given email.
     - Response:
         - **Status 200 (Success):** If the email/password combo is valid
