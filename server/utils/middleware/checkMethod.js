@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 export function checkMethod(allowedMethods, method) {
     let allowed = false;
     for (let i = 0; i < allowedMethods.length; i++) {
-        if (allowedMethods[i] == method.toUpperCase()) {
+        if (allowedMethods[i] == method) {
             allowed = true;
         }
     }
