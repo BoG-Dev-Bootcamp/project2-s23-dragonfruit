@@ -29,11 +29,9 @@ export default async function handler(req, res) {
             if(old == null) {
                 const user = new User(final)
                 await user.save()
-                await closeDB()
                 res.status(200)
                 return res.send({message: "User Created Successfully!"})
             } else {
-                await closeDB()
                 res.status(400)
                 return res.send({message: "User Not Created Successfully"})
             }
