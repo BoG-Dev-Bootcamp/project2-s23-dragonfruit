@@ -32,9 +32,7 @@ export default async function handler(req, res) {
         try {
             await connectDB()
             const pages = req.query.p || 1
-            const max = 3
-
-
+            const max = 10
 
             let all = []
 
@@ -44,8 +42,6 @@ export default async function handler(req, res) {
                 objID = lastID
                 all.push(page)
             }
-            
-            
             
             //await closeDB()
             res.status(200)
