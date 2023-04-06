@@ -31,7 +31,7 @@ export default async function handler(req, res) {
     if (true) {
         try {
             await connectDB()
-            const pages = req.query.p || 1
+            const pages = req.query.p || 0
             const max = 3
 
 
