@@ -1,6 +1,6 @@
 import animal from '../../../../server/mongodb/models/animal.js'
 import animalSchema from "../../../../server/mongodb/models/trainingLog.js"
-import { closeDB } from '../../../../server/utils/db.js';
+import {connectDB, closeDB} from "../../../../server/utils/db.js"
 
 export default async function handler(req, res) {
 
