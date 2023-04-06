@@ -22,7 +22,7 @@ For this project, you will create an animal training management app! Your job fo
 
 ## Level 1: Easy
 - (2) Create a POST endpoint at `/api/user` to create a user in the database based on information passed into the body - **Complete**
-- (3) Create a POST endpoint at `/api/animal` to create an animal in the database based on information passed into the body - **Pennon**
+- (3) Create a POST endpoint at `/api/animal` to create an animal in the database based on information passed into the body - **Pennon In Progress**
 - (4) Create a POST endpoint at `/api/training` to create a training log in the database based on information passed into the body - **Complete**
 - Note these requests will have a similar request body and response statuses:
     - Body: A JSON containing the user/animal/training log information for the user/animal/training log we want to create
@@ -43,7 +43,7 @@ For this project, you will create an animal training management app! Your job fo
         - **Status 200 (Success):** If we are able to retrieve the users/animals/training logs
         - **Status 500**: For any other errors
     - **Note:** These endpoints must implement pagination -- ideally using the document IDs or some other property that has natural ordering (i.e. take a look at approach 2 in this [article](https://www.codementor.io/@arpitbhayani/fast-and-efficient-pagination-in-mongodb-9095flbqr))
-- (9) We want to create a resuable middleware function that takes in an `allowedMethods` array of strings i.e. `['POST', 'GET', 'DELETE']` and a `method` string with the current method being used in the request. This function should check if `method` is in `allowedMethods`
+- (9) We want to create a resuable middleware function that takes in an `allowedMethods` array of strings i.e. `['POST', 'GET', 'DELETE']` and a `method` string with the current method being used in the request. This function should check if `method` is in `allowedMethods` - **Justin In Progress**
 	- Response
 		- **Status 400**: If the request `method` is not in `allowedMethods`
 		- **return NextResponse.next()** - let the request through
