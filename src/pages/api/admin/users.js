@@ -12,14 +12,17 @@ const pagination = async (size, last_id) => {
         cursor = await User.find({'_id': {'$gt': last_id}}).limit(size)
     }
     
-
-    if (cursor.length < size) {
-        return {page: cursor, lastID: null}
-    }
     const page = []
     cursor.forEach(element => {
-        page.push(element)
+        //console.log(element);
+        const newObj = {_id: element._id, firstName: element.firstName, lastName: element.lastName, email: element.email, animalArray: element.animalArray, __v: element.__v}
+        page.push(newObj)
     })
+
+    if (cursor.length < size) {
+        return {page: page, lastID: null}
+    }
+    
 
     return {page: page, lastID: page[page.length - 1]._id}
     
@@ -31,7 +34,7 @@ export default async function handler(req, res) {
     if (true) {
         try {
             await connectDB()
-            const pages = req.query.p || 1
+            const pages = req.query.p || 0
             const max = 10
 
             let all = []
