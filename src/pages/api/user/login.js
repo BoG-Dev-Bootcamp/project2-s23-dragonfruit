@@ -24,7 +24,7 @@ export default async function handler(req, res) {
             
             } else {
                 const result = await bcrypt.compare(password, user.password)
-                return result ? res.status(200).send({message: "Logged in!"}) : res.status(400).send({message: "Incorrect Password!"})
+                return result ? res.status(200).send({message: "Logged in!"}) : res.status(403).send({message: "Incorrect Password!"})
             }
             
 
