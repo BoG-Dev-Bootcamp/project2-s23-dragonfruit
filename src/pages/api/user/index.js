@@ -8,18 +8,18 @@ import axios from "axios"
 
 
 export default async function handler(req, res) {
-    if (true) {
+    if (req.method == 'POST') {
         try {
-
+            console.log(req.body)
             await connectDB()
-            const password = "Test"
+            const password = req.body.password
             const salt = await bcrypt.genSalt(10)
             const hash = await bcrypt.hash(password, salt)
 
-            const userEmail = {email: "jq@gmail.com"}
+            const userEmail = {email: req.body.email}
             const old = await User.findOne(userEmail)
 
-            const info = {firstName: "Johannes", lastName: "Qian"}
+            const info = {firstName: req.body.firstName, lastName: req.body.lastName}
             const final = {
                 ...info,
                 ...userEmail,
@@ -44,5 +44,8 @@ export default async function handler(req, res) {
             console.log(error)
             return res.send(error)
         }
+    } else {
+        res.status(400)
+        return res.send({message: "Wrong method"})
     }
 }
