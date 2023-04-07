@@ -8,18 +8,27 @@ export default async function handler(request, response) {
 
             await connectDB()
 
+            console.log("before")
             const trainingLogData = {
-                _id: request.body.id,
-                date: request.body.date,
+                _id: new mongoose.Types.ObjectId(),
+                date: new Date(request.body.date),
                 description: request.body.description,
                 hours: request.body.hours,
-                animal: request.body.animal,
-                user: request.body.user,
+                // animal: request.body.animal,
+                animal: new mongoose.Types.ObjectId(request.body.animal),
+                // user: request.body.user,
+                user: new mongoose.Types.ObjectId(request.body.user),
                 trainingLogVideo: request.body.trainingLogVideo,
             }
 
+            console.log("created structure correctly")
+
+            // if (animal)
+
             const newTrainingLog = new trainingLogSchema(trainingLogData)
+            console.log("created schema instance correctly")
             await newTrainingLog.save()
+            console.log("saved correctly")
             
             await closeDB()
 
@@ -28,12 +37,13 @@ export default async function handler(request, response) {
             return response.send("Training log successfully added");
 
         } catch (error) {
+            console.log(error)
             await closeDB()
             response.status(400)
-            return response.send("There has been an error! Please reload the page and try again.")
+            return response.send("There is incorrect data in the post request");
         }
 
-    } else {
+    } else if (request.method == "GET") {
         /*
         await connectDB()
 
@@ -55,5 +65,9 @@ export default async function handler(request, response) {
         response.status(400);
 
         return response.send("Please send a post request not a Get request")
+
+    } else {
+        response.status(500)
+        return response.send("Something has gone wrong!");
     }
 }

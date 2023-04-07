@@ -1,10 +1,6 @@
 import mongoose from "mongoose"
 
 const trainingLogSchema = new mongoose.Schema({
-    _id: {
-        type: Object,
-        required: true
-    },
     date: {
         type: Date,
         required: true
