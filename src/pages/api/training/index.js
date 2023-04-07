@@ -1,8 +1,12 @@
 import mongoose from "mongoose"
 import trainingLogSchema from "../../../../server/mongodb/models/trainingLog.js"
 import { connectDB, closeDB } from "../../../../server/utils/db.js"
+import auth from "../user/auth.js"
 
 export default async function handler(request, response) {
+    const authenticate = auth(request, response) 
+    console.log(authenticate._id)
+
     if (request.method == "POST") {
         try {
 
@@ -10,14 +14,14 @@ export default async function handler(request, response) {
 
             console.log("before")
             const trainingLogData = {
-                _id: new mongoose.Types.ObjectId(),
+                //_id: new mongoose.Types.ObjectId(),
                 date: new Date(request.body.date),
                 description: request.body.description,
                 hours: request.body.hours,
                 // animal: request.body.animal,
                 animal: new mongoose.Types.ObjectId(request.body.animal),
                 // user: request.body.user,
-                user: new mongoose.Types.ObjectId(request.body.user),
+                user: new mongoose.Types.ObjectId(authenticate._id),
                 trainingLogVideo: request.body.trainingLogVideo,
             }
 
@@ -30,7 +34,7 @@ export default async function handler(request, response) {
             await newTrainingLog.save()
             console.log("saved correctly")
             
-            await closeDB()
+            //await closeDB()
 
             response.status(200)
 
