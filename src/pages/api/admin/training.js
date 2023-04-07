@@ -1,6 +1,7 @@
 import mongoose, { get } from "mongoose"
 import {connectDB, closeDB} from "../../../../server/utils/db.js"
 import trainingLog from "../../../../server/mongodb/models/trainingLog.js"
+import auth from "../user/auth.js"
 
 
 
@@ -28,7 +29,8 @@ const pagination = async (size, last_id) => {
 
 
 export default async function handler(req, res) {
-    if (true) {
+    const authenticate = auth(req, res) 
+    if (authenticate.admin) {
         try {
             await connectDB()
             const pages = req.query.p || 0
@@ -56,5 +58,8 @@ export default async function handler(req, res) {
             console.log(error)
             return res.send(error)
         }
+    } else {
+        res.status(403);
+        res.send("Login Again!")
     }
 }

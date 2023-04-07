@@ -2,8 +2,8 @@ import mongoose from "mongoose"
 import User from "../../../../server/mongodb/models/user.js"
 import {connectDB, closeDB} from "../../../../server/utils/db.js"
 import bcrypt from "bcryptjs"
-
-import axios from "axios"
+import { sign } from "jsonwebtoken"
+import { serialize } from "cookie";
 
 
 
@@ -16,6 +16,9 @@ export default async function handler(req, res) {
 
             const userEmail = {email: req.body.email}
             const user = await User.findOne(userEmail)
+            const info = {_id: user._id, firstName: user.firstName, lastName: user.lastName}
+
+
 
 
             if(user == null) {
@@ -30,7 +33,18 @@ export default async function handler(req, res) {
                 } 
 
 
-                res.status(200).send({message: "Logged in!"})
+                const token = sign({ admin: true, ...info}, process.env.SECRET, { expiresIn: '7200s' })
+
+                const serialized = serialize("OurJWT", token, {
+                    httpOnly: true,
+                    secure: false, // change this in production
+                    sameSite: "strict",
+                    maxAge: 60,
+                });
+                res.setHeader('Set-Cookie', serialized)
+                res.status(200).send("JWT Created! " + token)
+
+
             }
             
 
