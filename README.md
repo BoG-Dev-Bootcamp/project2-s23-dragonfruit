@@ -16,14 +16,14 @@ For this project, you will create an animal training management app! Your job fo
 - To test your API we recommend using [Postman](https://www.postman.com)
 
 ## Level 0: Setup
-- (0) Setup a MongoDB database - **Johannes**
+- (0) Setup a MongoDB database - **Complete**
 - (1) Create a GET endpoint at `/api/health` to test whether your API server is functioning and healthy
-    - This can return a JSON with `{"healthy": true}` - **Johannes**
+    - This can return a JSON with `{"healthy": true}` - **Complete**
 
 ## Level 1: Easy
-- (2) Create a POST endpoint at `/api/user` to create a user in the database based on information passed into the body - **Johannes**
-- (3) Create a POST endpoint at `/api/animal` to create an animal in the database based on information passed into the body - **Pennon**
-- (4) Create a POST endpoint at `/api/training` to create a training log in the database based on information passed into the body - **Parker**
+- (2) Create a POST endpoint at `/api/user` to create a user in the database based on information passed into the body - **Complete**
+- (3) Create a POST endpoint at `/api/animal` to create an animal in the database based on information passed into the body - **Pennon In Progress**
+- (4) Create a POST endpoint at `/api/training` to create a training log in the database based on information passed into the body - **Complete**
 - Note these requests will have a similar request body and response statuses:
     - Body: A JSON containing the user/animal/training log information for the user/animal/training log we want to create
     - Response:
@@ -36,20 +36,20 @@ For this project, you will create an animal training management app! Your job fo
     - Response:
         - **Status 400:** If the training log animal is not owned by specified user
 - We want to add admin functionality to this backend API to allow the admins to view all the data in the database
-    - (6) Create a GET endpoint at `/api/admin/users` which will return all of the users in the database (not with their passwords) - **Johannes**
-    - (7) Create a GET endpoint at `/api/admin/animals` which will return all of the animals in the database - **Johannes**
-    - (8) Create a GET endpoint at `/api/admin/training` which will return all of the training logs in the database - **Johannes**
+    - (6) Create a GET endpoint at `/api/admin/users` which will return all of the users in the database (not with their passwords) - **Complete**
+    - (7) Create a GET endpoint at `/api/admin/animals` which will return all of the animals in the database - **Complete**
+    - (8) Create a GET endpoint at `/api/admin/training` which will return all of the training logs in the database - **Complete**
     - Response:
         - **Status 200 (Success):** If we are able to retrieve the users/animals/training logs
         - **Status 500**: For any other errors
     - **Note:** These endpoints must implement pagination -- ideally using the document IDs or some other property that has natural ordering (i.e. take a look at approach 2 in this [article](https://www.codementor.io/@arpitbhayani/fast-and-efficient-pagination-in-mongodb-9095flbqr))
-- (9) We want to create a resuable middleware function that takes in an `allowedMethods` array of strings i.e. `['POST', 'GET', 'DELETE']` and a `method` string with the current method being used in the request. This function should check if `method` is in `allowedMethods` **Justin**
+- (9) We want to create a resuable middleware function that takes in an `allowedMethods` array of strings i.e. `['POST', 'GET', 'DELETE']` and a `method` string with the current method being used in the request. This function should check if `method` is in `allowedMethods` - **Justin In Progress**
 	- Response
 		- **Status 400**: If the request `method` is not in `allowedMethods`
 		- **return NextResponse.next()** - let the request through
 
 ## Level 3: Hard
-- (10) We want to add user authentication. In the user creation endpoint (1), add code that allows a password to be accepted. Encrypt this password using an encryption library (we recommend using [bcrypt](https://www.npmjs.com/package/bcrypt)) and save it in the database under the user's password field
+- (10) We want to add user authentication. In the user creation endpoint (1), add code that allows a password to be accepted. Encrypt this password using an encryption library (we recommend using [bcrypt](https://www.npmjs.com/package/bcrypt)) and save it in the database under the user's password field - **Complete**
 - (11) Create a POST endpoint at `/api/user/login` that accepts an email and password and tests whether the password is valid for the given email.
     - Response:
         - **Status 200 (Success):** If the email/password combo is valid
