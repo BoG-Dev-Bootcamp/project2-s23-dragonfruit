@@ -9,7 +9,7 @@ export default async function handler(req, res) {
             name: req.body.name,
             hoursTrained: req.body.hoursTrained,
             owner: req.body.owner,
-            dateOfBirth: req.body.dateOfBirth,
+            dateOfBirth: new Date(req.body.dateOfBirth),
             profilePicture: req.body.profilePicture,
         }
 
