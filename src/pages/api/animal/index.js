@@ -1,5 +1,5 @@
 import animal from '../../../../server/mongodb/models/animal.js'
-import animalSchema from "../../../../server/mongodb/models/trainingLog.js"
+import animalSchema from "../../../../server/mongodb/models/animal.js"
 import {connectDB, closeDB} from "../../../../server/utils/db.js"
 
 export default async function handler(req, res) {
@@ -18,9 +18,11 @@ export default async function handler(req, res) {
             let newAnimal = new animalSchema(newAnimalSchemaData);
             await newAnimal.save();
             await closeDB()
-            return res.status(200)
+            console.log("closed")
+            return res.status(200).send("New animal created")
 
         } catch (error) {
+            console.log(error)
             return res.status(400)
         }
     } else {
