@@ -25,14 +25,14 @@ export default async function handler(request, response) {
 
             const userData = await userSchema.findOne(trainingLogData.user).lean()
 
-            if (typeof userData === typeof null) {
+            if (typeof userData === null) {
                 throw new Error("User does not exist!")
 
             } else {
                 let found = false
 
                 for (let i = 0; i < userData.animalArray.length; i++) {
-                    if (trainingLogData.animal.toString() === userData.animalArray[i].slice(10, 34)) {
+                    if (trainingLogData.animal.equals(userData.animalArray[i])) {
                         found = true
                         break
                     }
@@ -54,6 +54,7 @@ export default async function handler(request, response) {
 
         } catch (error) {
             console.log(error)
+
             await closeDB()
             response.status(400)
             return response.send("There is incorrect data in the post request");
@@ -77,12 +78,13 @@ export default async function handler(request, response) {
         await newTrainingLog.save()
         await closeDB()
         */
-        
+
         response.status(400);
 
         return response.send("Please send a Post request not a Get request")
 
     } else {
+        await closeDB()
         response.status(500)
         return response.send("Something has gone wrong!");
     }
