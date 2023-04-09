@@ -26,7 +26,7 @@ export default async function handler(req, res) {
                 password: hash
             }
 
-            if(old == null) {
+            if (old == null) {
                 const user = new User(final)
                 await user.save()
                 res.status(200)

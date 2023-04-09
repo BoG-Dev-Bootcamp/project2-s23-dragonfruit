@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import trainingLogSchema from "../../../../server/mongodb/models/trainingLog.js"
+import userSchema from "../../../../server/mongodb/models/user.js"
 import { connectDB, closeDB } from "../../../../server/utils/db.js"
 import auth from "../user/auth.js"
 
@@ -12,29 +13,40 @@ export default async function handler(request, response) {
 
             await connectDB()
 
-            console.log("before")
             const trainingLogData = {
-                //_id: new mongoose.Types.ObjectId(),
                 date: new Date(request.body.date),
                 description: request.body.description,
                 hours: request.body.hours,
-                // animal: request.body.animal,
                 animal: new mongoose.Types.ObjectId(request.body.animal),
-                // user: request.body.user,
                 user: new mongoose.Types.ObjectId(authenticate._id),
+                // user: new mongoose.Types.ObjectId(request.body.user),
                 trainingLogVideo: request.body.trainingLogVideo,
             }
 
-            console.log("created structure correctly")
+            const userData = await userSchema.findOne(trainingLogData.user).lean()
 
-            // if (animal)
+            if (typeof userData === typeof null) {
+                throw new Error("User does not exist!")
+
+            } else {
+                let found = false
+
+                for (let i = 0; i < userData.animalArray.length; i++) {
+                    if (trainingLogData.animal.toString() === userData.animalArray[i].slice(10, 34)) {
+                        found = true
+                        break
+                    }
+                }
+
+                if (!found) {
+                    throw new Error("User does not own this animal!")
+                }
+            }
 
             const newTrainingLog = new trainingLogSchema(trainingLogData)
-            console.log("created schema instance correctly")
             await newTrainingLog.save()
-            console.log("saved correctly")
             
-            //await closeDB()
+            await closeDB()
 
             response.status(200)
 
@@ -68,7 +80,7 @@ export default async function handler(request, response) {
         
         response.status(400);
 
-        return response.send("Please send a post request not a Get request")
+        return response.send("Please send a Post request not a Get request")
 
     } else {
         response.status(500)
