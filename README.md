@@ -22,7 +22,7 @@ For this project, you will create an animal training management app! Your job fo
 
 ## Level 1: Easy
 - (2) Create a POST endpoint at `/api/user` to create a user in the database based on information passed into the body - **Complete**
-- (3) Create a POST endpoint at `/api/animal` to create an animal in the database based on information passed into the body - **Pennon In Progress**
+- (3) Create a POST endpoint at `/api/animal` to create an animal in the database based on information passed into the body - **Complete**
 - (4) Create a POST endpoint at `/api/training` to create a training log in the database based on information passed into the body - **Complete**
 - Note these requests will have a similar request body and response statuses:
     - Body: A JSON containing the user/animal/training log information for the user/animal/training log we want to create
@@ -32,7 +32,7 @@ For this project, you will create an animal training management app! Your job fo
         - **Status 500:** For any other errors that occur
 
 ## Level 2: Medium
-- (5) In the training log creation endpoint (3), we want to add in a check to ensure that the animal specified in the training log belongs to the user specified in the training log. Add in code to do this. - **Parker**
+- (5) In the training log creation endpoint (3), we want to add in a check to ensure that the animal specified in the training log belongs to the user specified in the training log. Add in code to do this. - **Complete**
     - Response:
         - **Status 400:** If the training log animal is not owned by specified user
 - We want to add admin functionality to this backend API to allow the admins to view all the data in the database
@@ -43,23 +43,23 @@ For this project, you will create an animal training management app! Your job fo
         - **Status 200 (Success):** If we are able to retrieve the users/animals/training logs
         - **Status 500**: For any other errors
     - **Note:** These endpoints must implement pagination -- ideally using the document IDs or some other property that has natural ordering (i.e. take a look at approach 2 in this [article](https://www.codementor.io/@arpitbhayani/fast-and-efficient-pagination-in-mongodb-9095flbqr))
-- (9) We want to create a resuable middleware function that takes in an `allowedMethods` array of strings i.e. `['POST', 'GET', 'DELETE']` and a `method` string with the current method being used in the request. This function should check if `method` is in `allowedMethods` - **Justin In Progress**
+- (9) We want to create a resuable middleware function that takes in an `allowedMethods` array of strings i.e. `['POST', 'GET', 'DELETE']` and a `method` string with the current method being used in the request. This function should check if `method` is in `allowedMethods` - **Complete**
 	- Response
 		- **Status 400**: If the request `method` is not in `allowedMethods`
 		- **return NextResponse.next()** - let the request through
 
 ## Level 3: Hard
 - (10) We want to add user authentication. In the user creation endpoint (1), add code that allows a password to be accepted. Encrypt this password using an encryption library (we recommend using [bcrypt](https://www.npmjs.com/package/bcrypt)) and save it in the database under the user's password field - **Complete**
-- (11) Create a POST endpoint at `/api/user/login` that accepts an email and password and tests whether the password is valid for the given email.
+- (11) Create a POST endpoint at `/api/user/login` that accepts an email and password and tests whether the password is valid for the given email. - **Complete**
     - Response:
         - **Status 200 (Success):** If the email/password combo is valid
         - **Status 403**: If the email password combo is invalid 
-- (12) We are going to make our application even more secure by adding JSON Web Token (JWT) functionality to secure our endpoints. Create a POST endpoint at `/api/user/verify` that issues a JSON Web Token to the user if they issue the correct email/password combination.
+- (12) We are going to make our application even more secure by adding JSON Web Token (JWT) functionality to secure our endpoints. Create a POST endpoint at `/api/user/verify` that issues a JSON Web Token to the user if they issue the correct email/password combination. - **Complete**
     - Response:
         - **Status 200 (Success):** If the email/password combo is valid + issue a JWT that includes the entirety of their profile information
         - **Status 403**: If the email password combo is invalid
-- (13) In each of our endpoints, verify the JWT and only allow execution of the endpoint if the JWT is not expired and is valid 
-- (14) Because the JWT includes information about the user making the request, refactor your endpoints to draw information from the JWT rather than the body of the request
+- (13) In each of our endpoints, verify the JWT and only allow execution of the endpoint if the JWT is not expired and is valid - **Complete**
+- (14) Because the JWT includes information about the user making the request, refactor your endpoints to draw information from the JWT rather than the body of the request - **Complete**
     - i.e. we no longer need to manually specifiy a user id when creating a service animal beacuse we can pull from the info encoded into the JWT.
     
 ## Level 4: Above and Beyond
