@@ -1,11 +1,10 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import Button from './components/button'
+import React, { useState } from "react"
 
 export default function Home() {
+  const [ screen, setScreen ] = useState(0) // 0 is Main Screen, 1 is Create Account, 2 is Sign In
+  
   return (
     <>
       <Head>
