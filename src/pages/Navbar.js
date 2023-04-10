@@ -8,15 +8,14 @@ export default function Navbar() {
                 Home
             </Link>
             <ul>
-                <CustomLink href="/home">See your friends</CustomLink>
-                <CustomLink href="/addDog">Add a Friend</CustomLink>
+                <CustomLink href="/home">See your Friends</CustomLink>
+                <CustomLink href="/addAnimal">Add a Friend</CustomLink>
                 <CustomLink href="/addLog">Add a Log</CustomLink>
                 <CustomLink href="/signIn">Log in</CustomLink>
                 <CustomLink href="/contact">Contact</CustomLink>
             </ul>
         </nav>
     )
-
     
 }
 

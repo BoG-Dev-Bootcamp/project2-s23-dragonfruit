@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -8,13 +12,14 @@ body {
 
 
 .nav {
-    background-color: #333;
-    color: white;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #24252A;
+    color: #edf0f1;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
     gap: 2rem;
-    padding: 0 1rem;
+    padding: 20px 5%;
 }
 
 .nav ul {
@@ -31,15 +36,13 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
-    padding: .25rem;
+    padding: 0px 20px;
 
 }
 
-
-.nav li.active {
-    background-color: #555;
+.nav li {
+    transition: all 0.3s ease 0s;
 }
-
 .nav li:hover {
-    background-color: #777;
+    color: #0088a9;
 }
