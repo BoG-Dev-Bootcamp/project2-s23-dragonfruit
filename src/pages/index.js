@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Button from './components/button'
 import React, { useState } from "react"
+import TextBox from './components/textBox'
 
 export default function Home() {
   const [ screen, setScreen ] = useState(0) // 0 is Main Screen, 1 is Create Account, 2 is Sign In
@@ -25,6 +26,7 @@ export default function Home() {
                 setScreen(2)
               }}
             />
+            <TextBox />
           </div>
         </>
       ) : (
