@@ -8,7 +8,6 @@ export default function SignIn() {
 
     return (
         <>
-            <Button type="Link" link="/" buttonText="Back to Home Page"/>
             <div>
                 <h1>Sign In</h1>
                 <h3>Email</h3>

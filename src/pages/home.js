@@ -11,7 +11,6 @@ export default function HomePage() {
 
     return (
         <>
-            <Button type="Link" link="/" buttonText="Back to Home Page"/>
             <h1>Your Animals</h1>
             <Button buttonText="Add New Animal" />
             <FlatList

@@ -3,27 +3,14 @@ import Button from "./components/button"
 import TextBox from "./components/textBox"
 import axios from "axios"
 
-/*
-const getFetcher = (firstName, lastName, email, password) => {
-    const fetcher = async (url) => {
-        const res = await axios.post(url, {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password
-        })
-        return res.data
-    }
-}
-*/
-
-async function getFetcher(url, firstName, lastName, email, password) {
+async function sendPost(url, firstName, lastName, email, password) {
     const res = await axios.post(url, {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        email: email.trim(),
+        password: password.trim()
     })
+
     return res.data
 }
 
@@ -37,7 +24,6 @@ export default function CreateAccount() {
 
     return (
         <>
-            <Button type="Link" link="/" buttonText="Back to Home Page"/>
             <div>
                 <h1>Create Account</h1>
 
@@ -78,17 +64,40 @@ export default function CreateAccount() {
 
                 <Button buttonText="Create Account" 
                     onClick={() => {
-                        (password !== passwordConfirm) ? (
-                            setErrorMsg("Password and confirmation must be the same!")
+                        (firstName.trim() === "") ? (
+                            setErrorMsg("First name cannot be blank")
                         ) : (
-                            setErrorMsg("")
+                            (lastName.trim() === "") ? (
+                                setErrorMsg("Last name cannot be blank")
+                            ) : (
+                                (email.trim() === "") ? (
+                                    setErrorMsg("Email cannot be blank")
+                                ) : (
+                                    (password.trim() === "") ? (
+                                        setErrorMsg("Password cannot be blank")
+                                    ) : (
+                                        (passwordConfirm.trim() === "") ? (
+                                            setErrorMsg("Password confirmation cannot be blank")
+                                        ) : (
+                                            (password !== passwordConfirm) ? (
+                                                setErrorMsg("Password and confirmation must be the same!")
+                                            ) : (
+                                                (sendPost("api/user", firstName, lastName, email, password)
+                                                    .then((response) => {
+                                                        setErrorMsg("")
+                                                        window.location.href = '/home'
+                                                    }).catch((error) => {
+                                                        setErrorMsg("This email address already has an account, you can Sign In instead")
+                                                    }))
+                                            )
+                                        )
+                                    )
+                                )
+                            )
                         );
-
-                        (errorMsg === "") ? (
-                            getFetcher("api/user", firstName, lastName, email, password)
-                        ) : (null);
                     }} 
                 />
+
                 <h2>{errorMsg}</h2>
 
                 <Button type="Link" link="/signIn" buttonText="Have an account? Sign In Instead" />
