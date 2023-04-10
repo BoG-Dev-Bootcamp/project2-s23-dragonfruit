@@ -10,7 +10,7 @@ export default function TextBox(props) {
     return (
         <div class={props.textboxBox}>
             <input type={props.type || "text"} value={props.value} placeholder={props.placeholder} class={props.textStyle}
-                onChange={props.onChange} onKeyDown={props.onKeyDown}
+                onChange={props.onChange} onKeyDown={props.onKeyDown} autocomplete="off"
             />
         </div>
     );

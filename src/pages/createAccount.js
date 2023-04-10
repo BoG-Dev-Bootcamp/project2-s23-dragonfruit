@@ -1,6 +1,31 @@
 import React, { useState } from "react"
 import Button from "./components/button"
 import TextBox from "./components/textBox"
+import axios from "axios"
+
+/*
+const getFetcher = (firstName, lastName, email, password) => {
+    const fetcher = async (url) => {
+        const res = await axios.post(url, {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password
+        })
+        return res.data
+    }
+}
+*/
+
+async function getFetcher(url, firstName, lastName, email, password) {
+    const res = await axios.post(url, {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password
+    })
+    return res.data
+}
 
 export default function CreateAccount() {
     const [ firstName, setFirstName ] = useState("")
@@ -8,6 +33,7 @@ export default function CreateAccount() {
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
     const [ passwordConfirm, setPasswordConfirm ] = useState("")
+    const [ errorMsg, setErrorMsg ] = useState("")
 
     return (
         <>
@@ -50,7 +76,20 @@ export default function CreateAccount() {
                     }}
                 />
 
-                <Button buttonText="Create Account" />
+                <Button buttonText="Create Account" 
+                    onClick={() => {
+                        (password !== passwordConfirm) ? (
+                            setErrorMsg("Password and confirmation must be the same!")
+                        ) : (
+                            setErrorMsg("")
+                        );
+
+                        (errorMsg === "") ? (
+                            getFetcher("api/user", firstName, lastName, email, password)
+                        ) : (null);
+                    }} 
+                />
+                <h2>{errorMsg}</h2>
 
                 <Button type="Link" link="/signIn" buttonText="Have an account? Sign In Instead" />
             </div>
