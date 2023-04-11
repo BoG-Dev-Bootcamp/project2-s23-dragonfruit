@@ -1,10 +1,21 @@
 import React, { useState } from "react"
 import Button from "./components/button"
 import TextBox from "./components/textBox"
+import axios from "axios"
+
+async function sendPost(url, email, password) {
+    const res = await axios.post(url, {
+        email: email.trim(),
+        password: password.trim()
+    })
+
+    return res.data
+}
 
 export default function SignIn() {
-    const [ email, setEmail ] = useState(undefined)
-    const [ password, setPassword ] = useState(undefined)
+    const [ email, setEmail ] = useState("")
+    const [ password, setPassword ] = useState("")
+    const [ errorMsg, setErrorMsg ] = useState("")
 
     return (
         <>
@@ -24,7 +35,28 @@ export default function SignIn() {
                     }} 
                 />
 
-                <Button buttonText="Sign In" />
+                <Button buttonText="Sign In" 
+                    onClick={() => {
+                        (email.trim() === "") ? (
+                            setErrorMsg("Email cannot be blank")
+                        ) : (
+                            (password.trim() === "") ? (
+                                setErrorMsg("Password cannot be blank")
+                            ) : (
+                                (sendPost("api/user/login", email, password)
+                                    .then((response) => {
+                                        setErrorMsg("")
+                                        window.location.href = '/home'
+                                    }).catch((error) => {
+                                        setErrorMsg("Incorrect username or password")
+                                    })
+                                )
+                            )
+                        )
+                    }}
+                />
+
+                <h2>{errorMsg}</h2>
 
                 <Button type="Link" link="/createAccount" buttonText="Don't have an account? Create Account Instead" />
             </div>

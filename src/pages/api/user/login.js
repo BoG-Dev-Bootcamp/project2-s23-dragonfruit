@@ -9,6 +9,7 @@ import axios from "axios"
 export default async function handler(req, res) {
     if (req.method == 'POST') {
         try {
+            console.log("In login")
             await connectDB()
             const password = req.body.password
 
@@ -17,6 +18,7 @@ export default async function handler(req, res) {
 
 
             if(user == null) {
+                console.log("Not logged in")
                 res.status(400)
                 return res.send({message: "Not logged in"})
 
@@ -24,11 +26,12 @@ export default async function handler(req, res) {
             } else {
                 const result = await bcrypt.compare(password, user.password)
                 if (!result) {
-                    res.status(403).send({message: "Incorrect Password!"})
+                    console.log("Incorrect password")
+                    return res.status(403).send({message: "Incorrect Password!"})
                 } 
 
 
-                res.status(200).send({message: "Logged in!"})
+                return res.status(200).send({message: "Logged in!"})
             }
             
 
