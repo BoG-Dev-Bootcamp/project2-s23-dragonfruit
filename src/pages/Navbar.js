@@ -8,7 +8,7 @@ export default function Navbar() {
                 Home
             </Link>
             <ul>
-                <CustomLink href="/home">See your Friends</CustomLink>
+                <CustomLink href="/home">Account</CustomLink>
                 <CustomLink href="/addAnimal">Add a Friend</CustomLink>
                 <CustomLink href="/addLog">Add a Log</CustomLink>
                 <CustomLink href="/signIn">Log in</CustomLink>

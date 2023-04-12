@@ -1,31 +1,29 @@
 import React, { useState } from "react"
 import Button from "./components/button"
-import TextBox from "./components/textBox"
 import axios from "axios"
 import { useForm } from "react-hook-form"
+import clientauth from "./api/user/clientauth"
+import Cookies from "js-cookie"
 
-async function sendPost(url, firstName, lastName, email, password) {
+async function sendPost(url, name, hours, date, pfp) {
     const res = await axios.post(url, {
-        firstName: firstName.trim(),
-        lastName: lastName.trim(),
-        email: email.trim(),
-        password: password.trim()
+        profilePicture: name,
+        hoursTrained: hours,
+        dateOfBirth: date,
+        profilePicture: pfp
     })
 
     return res.data
 }
 
-async function getAuth() {
-    const res = await axios.get("/api/user/auth.js")
-    return res.data
 
-}
 
 export default function addAnimal() {
+    console.log(Cookies.get('token'))
     
-    const loggedIn = getAuth()
-    console.log("test")
-    const onSubmit = data => console.log(data)
+    const onSubmit = (data) => {
+        sendPost("/api/animal", data.text, data.hours, data.date, data.pfp)
+    }
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 

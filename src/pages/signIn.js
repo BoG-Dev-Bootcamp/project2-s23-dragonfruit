@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Button from "./components/button"
 import TextBox from "./components/textBox"
 import axios from "axios"
+import Cookies from "js-cookie"
 
 async function sendPost(url, email, password) {
     const res = await axios.post(url, {
@@ -43,11 +44,13 @@ export default function SignIn() {
                             (password.trim() === "") ? (
                                 setErrorMsg("Password cannot be blank")
                             ) : (
-                                (sendPost("api/user/login", email, password)
+                                (sendPost("api/user/verify", email, password)
                                     .then((response) => {
+                                        Cookies.set('token', response, {expires: 1/48, path:"/"})
                                         setErrorMsg("")
                                         window.location.href = '/home'
                                     }).catch((error) => {
+                                        console.log(error)
                                         setErrorMsg("Incorrect username or password")
                                     })
                                 )

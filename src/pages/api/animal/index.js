@@ -5,14 +5,14 @@ import {connectDB, closeDB} from "../../../../server/utils/db.js"
 import auth from "../user/auth.js"
 
 export default async function handler(req, res) {
-    const authenticate = auth(request, response) 
+    const authenticate = auth(req, res) 
 
     if (req.method == 'POST') {
         let newAnimalSchemaData = {
             name: req.body.name,
             hoursTrained: req.body.hoursTrained,
-            owner: new mongoose.Types.ObjectId(authenticate._id),
-            // owner: new mongoose.Types.ObjectId(req.body.owner),
+            //owner: new mongoose.Types.ObjectId(authenticate._id),
+            owner: new mongoose.Types.ObjectId(req.body.owner),
             dateOfBirth: new Date(req.body.dateOfBirth),
             profilePicture: req.body.profilePicture,
         }

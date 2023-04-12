@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server"
+import { NextResponse, NextRequest} from "next/server"
 import { checkMethod } from "../server/utils/middleware/checkMethod.js"
 
 export default function middleware(req){

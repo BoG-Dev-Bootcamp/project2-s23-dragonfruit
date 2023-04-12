@@ -42,7 +42,7 @@ export default async function handler(req, res) {
                     maxAge: 60,
                 });
                 res.setHeader('Set-Cookie', serialized)
-                res.status(200).send("JWT Created! " + token)
+                return res.status(200).send(token)
 
 
             }
