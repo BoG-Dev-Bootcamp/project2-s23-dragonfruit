@@ -17,7 +17,6 @@ async function sendPost(url, name, hours, date, pfp) {
 }
 
 
-
 export default function addAnimal() {
     //console.log(Cookies.get('token'))
     
@@ -27,13 +26,18 @@ export default function addAnimal() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    let uid
     useEffect( () => {
         const token = (Cookies.get('token'))
-        console.log(clientauth(token))
+        //console.log("effect: " + token)
+        //console.log(clientauth(token)._id)
+        uid = clientauth(token)._id
+        console.log("uid: " + uid)
     })
+    console.log(uid)
     return (
         <>
-        {console.log("token: " + Cookies.get('token'))}
+        {console.log("token: " + uid)}
         <form onSubmit={handleSubmit(onSubmit)
             }>
             <div>

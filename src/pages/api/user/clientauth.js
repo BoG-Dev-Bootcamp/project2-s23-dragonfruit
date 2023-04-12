@@ -1,4 +1,4 @@
-import { verify } from "jsonwebtoken"
+import { verify, decode } from "jsonwebtoken"
 
 
 export default function clientauth(token) {
@@ -6,10 +6,12 @@ export default function clientauth(token) {
        return false 
     }
     const jwt = token
-    console.log(process.env)
+    
     try {
-        const decoded = verify(jwt, process.env.SECRET)
-        console.log(decoded)
+        const key = "javainuse-secret-key"
+        const decoded = decode(jwt)
+        //const decoded = verify(jwt, key)
+        //console.log("decoded: " + decoded)
         return decoded
     } catch (e) {
         return e
