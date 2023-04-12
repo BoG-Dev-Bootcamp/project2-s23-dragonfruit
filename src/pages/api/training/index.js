@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 import trainingLogSchema from "../../../../server/mongodb/models/trainingLog.js"
 import userSchema from "../../../../server/mongodb/models/user.js"
+import animalSchema from "../../../../server/mongodb/models/animal.js"
 import { connectDB, closeDB } from "../../../../server/utils/db.js"
 import auth from "../user/auth.js"
 
@@ -42,6 +43,8 @@ export default async function handler(request, response) {
                     throw new Error("User does not own this animal!")
                 }
             }
+
+            await animalSchema.updateOne( { _id: trainingLogData.animal }, { $inc: { hoursTrained: trainingLogData.hours } } )
 
             const newTrainingLog = new trainingLogSchema(trainingLogData)
             await newTrainingLog.save()
