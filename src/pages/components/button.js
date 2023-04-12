@@ -10,9 +10,9 @@ export default function Button(props) {
     return (
         (props.type === "Link") ? ( // Link button
             <>
-                <div class={props.buttonBox}>
-                    <Link href={props.link} class={props.buttonStyle}>
-                        <h1 class={props.textStyle}>
+                <div className={props.buttonBox}>
+                    <Link href={props.link} className={props.buttonStyle}>
+                        <h1 className={props.textStyle}>
                             {props.buttonText}
                         </h1>
                     </Link>
@@ -20,8 +20,8 @@ export default function Button(props) {
             </>
         ) : ( // Action button with onClick function
             <>
-                <div class={props.buttonBox}>
-                    <button type="button" class={props.buttonStyle} onClick={props.onClick}>
+                <div className={props.buttonBox}>
+                    <button type="button" className={props.buttonStyle} onClick={props.onClick}>
                         {props.buttonText}
                     </button>
                 </div>

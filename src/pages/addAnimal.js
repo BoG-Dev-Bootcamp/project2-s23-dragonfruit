@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Button from "./components/button"
 import axios from "axios"
 import { useForm } from "react-hook-form"
@@ -19,7 +19,7 @@ async function sendPost(url, name, hours, date, pfp) {
 
 
 export default function addAnimal() {
-    console.log(Cookies.get('token'))
+    //console.log(Cookies.get('token'))
     
     const onSubmit = (data) => {
         sendPost("/api/animal", data.text, data.hours, data.date, data.pfp)
@@ -27,9 +27,15 @@ export default function addAnimal() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    useEffect( () => {
+        const token = (Cookies.get('token'))
+        console.log(clientauth(token))
+    })
     return (
         <>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        
+        <form onSubmit={handleSubmit(onSubmit)
+            }>
             <div>
                 <h3>Name</h3>
                 <input placeholder="Max" type="text" {...register("name", {required: true})}/>

@@ -1,7 +1,7 @@
 import { verify } from "jsonwebtoken"
 
 export default function clientauth(token) {
-    if (!req) {
+    if (!token) {
        return false 
     }
     const jwt = token

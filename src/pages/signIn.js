@@ -10,6 +10,7 @@ async function sendPost(url, email, password) {
         password: password.trim()
     })
 
+
     return res.data
 }
 
@@ -17,6 +18,7 @@ export default function SignIn() {
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
     const [ errorMsg, setErrorMsg ] = useState("")
+    
 
     return (
         <>
