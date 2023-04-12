@@ -1,6 +1,6 @@
 import { verify } from "jsonwebtoken"
 
-export default function auth(req, res) {
+export default function auth(req) {
     if (!req) {
        return false 
     }

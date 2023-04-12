@@ -5,12 +5,16 @@ import { useForm } from "react-hook-form"
 import clientauth from "./api/user/clientauth"
 import Cookies from "js-cookie"
 
-async function sendPost(url, name, hours, date, pfp) {
+async function sendPost(url, name, hours, date, pfp, uid) {
+    
     const res = await axios.post(url, {
-        profilePicture: name,
+        name: name,
         hoursTrained: hours,
         dateOfBirth: date,
-        profilePicture: pfp
+        profilePicture: pfp,
+        headers: {
+            'Authorization': 'Bearer ' + uid
+        }
     })
 
     return res.data
@@ -18,26 +22,33 @@ async function sendPost(url, name, hours, date, pfp) {
 
 
 export default function addAnimal() {
-    //console.log(Cookies.get('token'))
+    //const [uid, setUid] = useState(null);
+    let res;
     
-    const onSubmit = (data) => {
-        sendPost("/api/animal", data.text, data.hours, data.date, data.pfp)
+    const onSubmit = async (data) => {
+        res = await sendPost("/api/animal", data.name, data.hours, data.date, data.pfp, uid)
+        if(res == "redirect") {
+            console.log("redirect")
+            return (
+                window.location.href = '/signIn'
+            )
+        }
     }
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-
     let uid
     useEffect( () => {
         const token = (Cookies.get('token'))
-        //console.log("effect: " + token)
-        //console.log(clientauth(token)._id)
-        uid = clientauth(token)._id
-        console.log("uid: " + uid)
+        uid = clientauth(token)
     })
-    console.log(uid)
+
+
+    
+
+
     return (
         <>
-        {console.log("token: " + uid)}
+        
         <form onSubmit={handleSubmit(onSubmit)
             }>
             <div>
@@ -57,7 +68,7 @@ export default function addAnimal() {
             </div>
             <div>
                 <h3>Profile Picture</h3>
-                <input placeholder="www." type="text" {...register("pfp", {required: true})}/>
+                <input placeholder="www." type="text" {...register("pfp")}/>
                 {errors.pfp && <span>This field is required</span>}
             </div>
 

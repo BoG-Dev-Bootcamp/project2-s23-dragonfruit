@@ -2,17 +2,25 @@ import mongoose from "mongoose"
 import animalSchema from "../../../../server/mongodb/models/animal.js"
 import userSchema from "../../../../server/mongodb/models/user.js"
 import {connectDB, closeDB} from "../../../../server/utils/db.js"
-import auth from "../user/auth.js"
+import clientauth from "../user/clientauth.js"
 
 export default async function handler(req, res) {
-    const authenticate = auth(req, res) 
+    //const authenticate = auth(req, res) 
+    const authenticate = clientauth(req.cookies.token)
+    console.log(authenticate)
 
+
+    if(authenticate == false) {
+        return res.send("redirect")
+    }
     if (req.method == 'POST') {
+        console.log(req.body) 
         let newAnimalSchemaData = {
+            
             name: req.body.name,
             hoursTrained: req.body.hoursTrained,
             //owner: new mongoose.Types.ObjectId(authenticate._id),
-            owner: new mongoose.Types.ObjectId(req.body.owner),
+            owner: new mongoose.Types.ObjectId(authenticate._id),
             dateOfBirth: new Date(req.body.dateOfBirth),
             profilePicture: req.body.profilePicture,
         }

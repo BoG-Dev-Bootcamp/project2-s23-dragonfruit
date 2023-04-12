@@ -14,7 +14,7 @@ export default function clientauth(token) {
         //console.log("decoded: " + decoded)
         return decoded
     } catch (e) {
-        return e
+        return false
     }
     
 }

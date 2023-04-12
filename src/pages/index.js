@@ -3,7 +3,6 @@ import Button from './components/button'
 import React, { useState } from "react"
 import TextBox from './components/textBox'
 import Link from 'next/link'
-import Navbar from './Navbar'
 
 export default function Home() {
   const [ screen, setScreen ] = useState(0) // 0 is Main Screen, 1 is Create Account, 2 is Sign In

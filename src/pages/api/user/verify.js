@@ -33,7 +33,7 @@ export default async function handler(req, res) {
                 } 
 
 
-                const token = sign({ admin: true, ...info}, process.env.SECRET, { expiresIn: '7200s' })
+                const token = sign({ admin: true, ...info}, process.env.SECRET, { expiresIn: '1800s' })
 
                 const serialized = serialize("OurJWT", token, {
                     httpOnly: true,
