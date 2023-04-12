@@ -33,7 +33,7 @@ export default function addAnimal() {
     })
     return (
         <>
-        
+        {console.log("token: " + Cookies.get('token'))}
         <form onSubmit={handleSubmit(onSubmit)
             }>
             <div>
