@@ -134,6 +134,7 @@ body {
 
 .item-box:hover {
     background-color: lightblue;
+    width: 100%
 }
 
 .link-button {
