@@ -39,25 +39,27 @@ export default async function handler(req, res) {
                     throw new Error("Same Name")
                 }
             })
+
             } catch (error) {
                 return res.send("Error creating animal")
             }
 
-            if (!sameName) {
-                let newAnimal = new animalSchema(newAnimalSchemaData);
+
+            
+            let newAnimal = new animalSchema(newAnimalSchemaData);
 
 
-                if (typeof userData === null) {
-                    throw new Error("Owner user does not exist!")
-    
-                } else {
-                    await userSchema.updateOne({ _id : userData._id }, { $push: { animalArray: newAnimal._id } })
-                }
-    
-                await newAnimal.save();
-    
-                console.log("closed")
+            if (typeof userData === null) {
+                throw new Error("Owner user does not exist!")
+
+            } else {
+                await userSchema.updateOne({ _id : userData._id }, { $push: { animalArray: newAnimal._id } })
             }
+
+            await newAnimal.save();
+
+            console.log("closed")
+            
             
             return res.status(200).send("created")
 
