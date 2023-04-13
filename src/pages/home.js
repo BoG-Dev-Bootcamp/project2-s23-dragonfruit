@@ -58,7 +58,7 @@ export default function HomePage() {
                         renderItem={(animal, idx) => (
                             <>
                                 <div className="item-box">
-                                    <img className="dogImage" src={animal.pfp}/>
+                                    <img className="dogImage" src={animal.pfp === "" ? "https://i.etsystatic.com/6643643/r/il/684f37/619857698/il_fullxfull.619857698_8val.jpg" : animal.pfp}/>
                                     <h2>{animal.name}</h2>
                                     <h4>Born on {format(new Date(animal.dob), "MMMM do, yyyy")}</h4>
                                     <h3>{animal.hoursTrained} Hours Trained</h3>
@@ -70,7 +70,7 @@ export default function HomePage() {
                         }
                         display={{
                             grid: true,
-                            gridGap: "0px",
+                            gridGap: "px",
                         }}
                     />
                 </div>
