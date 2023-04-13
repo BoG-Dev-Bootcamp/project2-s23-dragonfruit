@@ -43,7 +43,7 @@ export default async function handler(req, res) {
 
             await closeDB()
             console.log("closed")
-            return res.status(200).send("New animal created")
+            return res.status(200).send("created")
 
         } catch (error) {
             await closeDB()

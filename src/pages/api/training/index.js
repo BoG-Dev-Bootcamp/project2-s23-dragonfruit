@@ -18,7 +18,7 @@ export default async function handler(request, response) {
             await connectDB()
 
             console.log(request.body.animal)
-            const animalData = await AnimalSchema.findOne({name: request.body.animal}).lean()
+            const animalData = await animalSchema.findOne({name: request.body.animal}).lean()
             const trainingLogData = {
                 date: new Date(request.body.date),
                 description: request.body.description,
@@ -30,6 +30,8 @@ export default async function handler(request, response) {
             }
 
             const userData = await userSchema.findOne(trainingLogData.user).lean()
+
+            await animalSchema.updateOne({name: request.body.animal}, animalData.hours + request.body.hours)
 
             if (typeof userData === null) {
                 throw new Error("User does not exist!")
@@ -58,14 +60,11 @@ export default async function handler(request, response) {
 
             response.status(200)
 
-            return response.send("Training log successfully added");
+            return response.send("added");
 
         } catch (error) {
             console.log(error)
-
-            await closeDB()
-            response.status(400)
-            return response.send("There is incorrect data in the post request");
+            return response.send("false");
         }
 
     } else if (request.method == "GET") {
@@ -95,6 +94,6 @@ export default async function handler(request, response) {
         await closeDB()
         response.status(500)
         console.log(error)
-        return response.send("Something has gone wrong!");
+        return response.send("false");
     }
 }

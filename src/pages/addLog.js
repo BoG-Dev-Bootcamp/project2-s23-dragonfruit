@@ -34,10 +34,20 @@ async function getAnimals(uid) {
 
 
 export default function addLog() {
+    const[success, setSuccess] = useState("");
     const [animalArray, setAnimalArray] = useState([]);
     let res
     let uid
-    const { register, handleSubmit, formState: { errors }, control} = useForm();
+    const { register, handleSubmit, formState: { errors }, control, reset} = useForm();
+
+    const validateDate = (value) => {
+        const maxDate = new Date();
+        const inputDate = new Date(value);
+        if (inputDate > maxDate) {
+            return false;
+        }
+        return true;
+    }
     
     const onSubmit = async (data) => {
         res = await sendPost("/api/training", data.date, data.description, data.hours, data.animal, data.pfp, uid)
@@ -47,11 +57,17 @@ export default function addLog() {
                 window.location.href = '/signIn'
             )
         }
+        if(res == "added") {
+            setSuccess("Training Log created!")
+        } else {
+            setSuccess("Training Log not created correctly")
+        }
+        reset()
     }
 
-    const handleChange = (selectedOption) => {
-        console.log(`Option selected:`, selectedOption);
-    }
+    // const handleChange = (selectedOption) => {
+    //     console.log(`Option selected:`, selectedOption);
+    // }
 
     
     let aa = []
@@ -77,8 +93,8 @@ export default function addLog() {
 
 
 
-    const { field } = useController({ name: 'animal', control });
-    const { value: animalValue, onChange: animalOnChange, ...restAnimalField } = field;
+    //const { field } = useController({ name: 'animal', control });
+    //const { value: animalValue, onChange: animalOnChange, ...restAnimalField } = field;
 
     return (
         <>
@@ -86,8 +102,9 @@ export default function addLog() {
             }>
             <div>
                 <h3>Date Trained</h3>
-                <input type="date" {...register("date", {required: true})}/>
-                {errors.date && <span>This field is required</span>}
+                <input type="date" {...register("date", {required: true, validate: validateDate})}/>
+                {errors.date && errors.date.type === "required" && <span>This field is required</span>}
+                {errors.date && errors.date.type === "validate" && <span>Date cannot exceed todays date</span>}
             </div>
             <div>
                 <h3>Description</h3>
@@ -96,8 +113,9 @@ export default function addLog() {
             </div>
             <div>
                 <h3>Hours Trained</h3>
-                <input placeholder="0" type="number" {...register("hours", {required: true})}/>
-                {errors.hours && <span>This field is required</span>}
+                <input placeholder="0" type="number" {...register("hours", {required: true, min: 0})}/>
+                {errors.hours && errors.hours.type === "required" && <span>This field is required</span>}
+                {errors.hours && errors.hours.type === "min" && <span>Hours must be greater than 0</span>}
             </div>
 
             <div>
@@ -128,6 +146,7 @@ export default function addLog() {
             <button type="submit" value="Submit">Add Log!</button>
             
         </form>
+        <h2>{success}</h2>
         </>
     )
 }
