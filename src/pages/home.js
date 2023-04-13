@@ -18,8 +18,6 @@ async function getAnimals(uid) {
 export default function HomePage() {
     const [ animalArray, setAnimalArray ] = useState([])
 
-
-
     let uid
     let aa
     useEffect( () => {
@@ -53,23 +51,29 @@ export default function HomePage() {
                 <h1>Your Animals</h1>
                 <Button buttonText="Add New Animal" type="Link" link="/addAnimal" 
                     buttonStyle="link-button" buttonBox="link-button-box" textStyle="link-button-text"/>
-                <FlatList className="animalList"
-                    // list={dummyData}
-                    list={animalArray}
-                    renderItem={(animal, idx) => (
-                        <>
-                            <div className="item-box">
-                                <img className="dogImage" src={animal.pfp}/>
-                                <h2>{animal.name}</h2>
-                                <h4>Born on {format(new Date(animal.dob), "MMMM do, yyyy")}</h4>
-                                <h3>{animal.hoursTrained} Hours Trained</h3>
-                            </div>
-                        </>
-                    )}
-                    renderWhenEmpty={() => 
-                        <h3 class="link-button-default">You haven't added any animals yet!</h3>
-                    }
-                />
+                <div>
+                    <FlatList className="animalList"
+                        // list={dummyData}
+                        list={animalArray}
+                        renderItem={(animal, idx) => (
+                            <>
+                                <div className="item-box">
+                                    <img className="dogImage" src={animal.pfp}/>
+                                    <h2>{animal.name}</h2>
+                                    <h4>Born on {format(new Date(animal.dob), "MMMM do, yyyy")}</h4>
+                                    <h3>{animal.hoursTrained} Hours Trained</h3>
+                                </div>
+                            </>
+                        )}
+                        renderWhenEmpty={() => 
+                            <h3 class="link-button-default">You haven't added any animals yet!</h3>
+                        }
+                        display={{
+                            grid: true,
+                            gridGap: "0px",
+                        }}
+                    />
+                </div>
             </div>
         </>
     )
