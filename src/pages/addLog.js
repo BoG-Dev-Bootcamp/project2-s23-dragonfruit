@@ -57,8 +57,9 @@ export default function addLog() {
                 window.location.href = '/signIn'
             )
         }
-        if(res == "added") {
+        if (res == "added") {
             setSuccess("Training Log created!")
+            window.location.href = '/home'
         } else {
             setSuccess("Training Log not created correctly")
         }
@@ -88,7 +89,6 @@ export default function addLog() {
             setAnimalArray(temp)
         }
         fetchData()
-        
     }, [])
 
 
@@ -98,55 +98,60 @@ export default function addLog() {
 
     return (
         <>
-        <form onSubmit={handleSubmit(onSubmit)
-            }>
-            <div>
-                <h3>Date Trained</h3>
-                <input type="date" {...register("date", {required: true, validate: validateDate})}/>
-                {errors.date && errors.date.type === "required" && <span>This field is required</span>}
-                {errors.date && errors.date.type === "validate" && <span>Date cannot exceed todays date</span>}
-            </div>
-            <div>
-                <h3>Description</h3>
-                <input placeholder="Shake Hand" type="text" {...register("description", {required: true})}/>
-                {errors.name && <span>This field is required</span>}
-            </div>
-            <div>
-                <h3>Hours Trained</h3>
-                <input placeholder="0" type="number" {...register("hours", {required: true, min: 0})}/>
-                {errors.hours && errors.hours.type === "required" && <span>This field is required</span>}
-                {errors.hours && errors.hours.type === "min" && <span>Hours must be greater than 0</span>}
-            </div>
+            <div class="container-default">
+                <h1>Add Log</h1>
+                <form onSubmit={handleSubmit(onSubmit)
+                    }>
+                    <div class="input-container">
+                        <div class="textbox-default-box">
+                            <h3>Date Trained</h3>
+                            <input type="date" {...register("date", {required: true, validate: validateDate})} class="textbox-default"/>
+                            {errors.date && errors.date.type === "required" && <span class="error-text-small">This field is required</span>}
+                            {errors.date && errors.date.type === "validate" && <span class="error-text-small">Date cannot exceed todays date</span>}
+                        </div>
+                        <div class="textbox-default-box">
+                            <h3>Description</h3>
+                            <input placeholder="Shake Hand" type="text" {...register("description", {required: true})} class="textbox-default"/>
+                            {errors.description && <span class="error-text-small">This field is required</span>}
+                        </div>
+                        <div class="textbox-default-box">
+                            <h3>Hours Trained</h3>
+                            <input placeholder="0" type="number" {...register("hours", {required: true, min: 0})} class="textbox-default"/>
+                            {errors.hours && errors.hours.type === "required" && <span class="error-text-small">This field is required</span>}
+                            {errors.hours && errors.hours.type === "min" && <span class="error-text-small">Hours must be greater than 0</span>}
+                        </div>
 
-            <div>
-                <h3>Animal</h3>
-                <input placeholder="Animal" type="text" {...register("animal", {required: true})}/>
-                {errors.animal && <span>This field is required</span>}
-            </div>
-            {/* <div>
-                <label>Select Animal</label>
-                <Select
-                    className='select-input'
-                    placeholder="Select Animal"
-                    isClearable
-                    options={animalArray}
-                    value={animalValue ? animalArray.find(x => x.value === animalValue) : animalValue}
-                    onChange={option => animalOnChange(option ? option.value : option)}
-                    {...restAnimalField}
-                    {...register("animal", {required: true})}
-                />
-                {errors.animal && <p>{errors.animal.message}</p>}
-            </div> */}
-            <div>
-                <h3>Training Video</h3>
-                <input placeholder="www." type="text" {...register("pfp")}/>
-                {errors.pfp && <span>This field is required</span>}
-            </div>
+                        <div class="textbox-default-box">
+                            <h3>Animal</h3>
+                            <input placeholder="Animal" type="text" {...register("animal", {required: true})} class="textbox-default"/>
+                            {errors.animal && <span class="error-text-small">This field is required</span>}
+                        </div>
+                        {/* <div>
+                            <label>Select Animal</label>
+                            <Select
+                                className='select-input'
+                                placeholder="Select Animal"
+                                isClearable
+                                options={animalArray}
+                                value={animalValue ? animalArray.find(x => x.value === animalValue) : animalValue}
+                                onChange={option => animalOnChange(option ? option.value : option)}
+                                {...restAnimalField}
+                                {...register("animal", {required: true})}
+                            />
+                            {errors.animal && <p>{errors.animal.message}</p>}
+                        </div> */}
+                        <div class="textbox-default-box">
+                            <h3>Training Video</h3>
+                            <input placeholder="www." type="text" {...register("pfp")} class="textbox-default"/>
+                            {errors.pfp && <span class="error-text-small">This field is required</span>}
+                        </div>
+                    </div>
 
-            <button type="submit" value="Submit">Add Log!</button>
-            
-        </form>
-        <h2>{success}</h2>
+                    <button type="submit" value="Submit" class="button-default">Add Log!</button>
+                </form>
+
+                <h2>{success}</h2>
+            </div>
         </>
     )
 }

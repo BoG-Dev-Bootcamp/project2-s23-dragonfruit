@@ -1,5 +1,5 @@
 import '@/styles/styles.css'
-import Navbar from './navBar'
+import Navbar from './Navbar'
 
 export default function App({ Component, pageProps }) {
   return (

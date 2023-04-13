@@ -22,21 +22,23 @@ export default function SignIn() {
 
     return (
         <>
-            <div>
+            <div class="container-default">
                 <h1>Sign In</h1>
-                <h3>Email</h3>
-                <TextBox placeholder="Email" value={email}
-                    onChange={(event) => {
-                        setEmail(event.target.value)
-                    }} 
-                />
+                <div class="input-container">
+                    <h3>Email</h3>
+                    <TextBox placeholder="Email" value={email}
+                        onChange={(event) => {
+                            setEmail(event.target.value)
+                        }} 
+                    />
 
-                <h3>Password</h3>
-                <TextBox placeholder="Password" value={password} type="password"
-                    onChange={(event) => {
-                        setPassword(event.target.value)
-                    }} 
-                />
+                    <h3>Password</h3>
+                    <TextBox placeholder="Password" value={password} type="password"
+                        onChange={(event) => {
+                            setPassword(event.target.value)
+                        }} 
+                    />
+                </div>
 
                 <Button buttonText="Sign In" 
                     onClick={() => {
@@ -61,7 +63,7 @@ export default function SignIn() {
                     }}
                 />
 
-                <h2>{errorMsg}</h2>
+                <h2 class="error-text">{errorMsg}</h2>
 
                 <Button type="Link" link="/createAccount" buttonText="Don't have an account? Create Account Instead" />
             </div>

@@ -19,6 +19,7 @@ export default async function handler(request, response) {
 
             console.log(request.body.animal)
             const animalData = await animalSchema.findOne({name: request.body.animal}).lean()
+
             const trainingLogData = {
                 date: new Date(request.body.date),
                 description: request.body.description,
@@ -31,7 +32,7 @@ export default async function handler(request, response) {
 
             const userData = await userSchema.findOne(trainingLogData.user).lean()
 
-            await animalSchema.updateOne({name: request.body.animal}, animalData.hours + request.body.hours)
+            // await animalSchema.updateOne({name: request.body.animal}, animalData.hours + request.body.hours)
 
             if (typeof userData === null) {
                 throw new Error("User does not exist!")
@@ -68,24 +69,6 @@ export default async function handler(request, response) {
         }
 
     } else if (request.method == "GET") {
-        /*
-        await connectDB()
-
-        const trainingLogData = {
-            _id: 100,
-            date: Date(),
-            description: "This log teaches a cat how to sit",
-            hours: 1,
-            animal: new mongoose.Types.ObjectId(),
-            user: new mongoose.Types.ObjectId(),
-            trainingLogVideo: null,
-        }
-
-        const newTrainingLog = new trainingLogSchema(trainingLogData)
-        await newTrainingLog.save()
-        await closeDB()
-        */
-
         response.status(400);
 
         return response.send("Please send a Post request not a Get request")
