@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Button from "./components/button"
 import TextBox from "./components/textBox"
 import axios from "axios"
+import Cookies from "js-cookie"
 
 async function sendPost(url, firstName, lastName, email, password) {
     const res = await axios.post(url, {
@@ -86,8 +87,9 @@ export default function CreateAccount() {
                                             ) : (
                                                 (sendPost("api/user", firstName, lastName, email, password)
                                                     .then((response) => {
+                                                        Cookies.remove('token')
                                                         setErrorMsg("")
-                                                        window.location.href = '/home'
+                                                        window.location.href = '/'
                                                     }).catch((error) => {
                                                         setErrorMsg("This email address already has an account, you can Sign In instead")
                                                     }))

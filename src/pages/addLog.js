@@ -60,7 +60,7 @@ export default function addLog() {
         }
         if (res == "added") {
             setSuccess("Training Log created!")
-            window.location.href = '/home'
+            window.location.href = '/'
         } else {
             setSuccess("Training Log not created correctly")
         }

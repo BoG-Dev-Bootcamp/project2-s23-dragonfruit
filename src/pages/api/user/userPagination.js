@@ -41,11 +41,8 @@ export default async function handler(req, res) {
 
             const animalArray = userData.animalArray
             
-            
             let {wholeArray, updatedAnimalArray} = await getAllElements(animalArray)
 
-
-            console.log(wholeArray)
             await userSchema.updateOne({_id: user}, {animalArray: updatedAnimalArray})
             
             return res.status(200).send(wholeArray)
