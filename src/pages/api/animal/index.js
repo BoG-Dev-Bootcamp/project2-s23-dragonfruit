@@ -7,7 +7,7 @@ import clientauth from "../user/clientauth.js"
 export default async function handler(req, res) {
     //const authenticate = auth(req, res) 
     const authenticate = clientauth(req.cookies.token)
-    console.log(authenticate)
+
 
 
     if(authenticate == false) {
@@ -28,30 +28,45 @@ export default async function handler(req, res) {
         try {
             await connectDB()
 
-            let newAnimal = new animalSchema(newAnimalSchemaData);
-
             const userData = await userSchema.findOne(newAnimalSchemaData.owner).lean()
 
-            if (typeof userData === null) {
-                throw new Error("Owner user does not exist!")
 
-            } else {
-                await userSchema.updateOne({ _id : userData._id }, { $push: { animalArray: newAnimal._id } })
+            try{
+            userData.animalArray.forEach(async animal => {
+                const aData = await animalSchema.findOne(animal).lean()
+                if (aData != null && aData.name == req.body.name) {
+                    console.log("same name")
+                    throw new Error("Same Name")
+                }
+            })
+            } catch (error) {
+                return res.send("Error creating animal")
             }
 
-            await newAnimal.save();
+            if (!sameName) {
+                let newAnimal = new animalSchema(newAnimalSchemaData);
 
-            await closeDB()
-            console.log("closed")
+
+                if (typeof userData === null) {
+                    throw new Error("Owner user does not exist!")
+    
+                } else {
+                    await userSchema.updateOne({ _id : userData._id }, { $push: { animalArray: newAnimal._id } })
+                }
+    
+                await newAnimal.save();
+    
+                console.log("closed")
+            }
+            
             return res.status(200).send("created")
 
         } catch (error) {
-            await closeDB()
-            console.log(error)
-            return res.status(400).send("Error creating animal")
+            //console.log(error)
+            //REMOVED STATUS CODES BECAUSE HANDLED BY FRONTEND
+            return res.send("Error creating animal")
         }
     } else {
-        await closeDB()
         return res.status(500).send("Server error")
     }
 }

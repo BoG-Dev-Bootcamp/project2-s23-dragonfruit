@@ -118,9 +118,17 @@ body {
     margin-bottom: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-    width: 50%;
+    width: 40%;
     background-color: rgb(242, 242, 242);
     box-shadow: 1px 2px 4px lightgray;
+    transition: all 0.3s ease 0s;
+    font-size: 15px;
+}
+
+.item-box:hover {
+    width: 60%;
+    font-size: 20px;
+    background-color: lightblue;
 }
 
 .link-button {
@@ -143,4 +151,18 @@ body {
     font-size: 24px;
     text-decoration: none;
     color: black;
+}
+
+.dogImage {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    transition: all 0.3s ease 0s;
+    opacity: 70%;
+}
+
+.item-box:hover .dogImage {
+    height: 250px;
+    width: 250px;
+    opacity: 100%;
 }

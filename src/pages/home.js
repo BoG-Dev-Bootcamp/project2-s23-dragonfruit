@@ -12,28 +12,39 @@ async function getAnimals(uid) {
             'Authorization': 'Bearer ' + uid
         }
     })
-
     return res.data
 }
 
 export default function HomePage() {
     const [ animalArray, setAnimalArray ] = useState([])
 
-    const dummyData = [
-        {name: 'Bella', dateOfBirth: new Date(0), hoursTrained: 0},
-        {name: 'Mia', dateOfBirth: new Date(0), hoursTrained: 0},
-        {name: 'Fluffy', dateOfBirth: new Date(0), hoursTrained: 0},
-    ]
+
 
     let uid
+    let aa
     useEffect( () => {
         const token = (Cookies.get('token'))
         uid = clientauth(token)
+
         if (uid === false) {
             window.location.href = "/signIn"
         }
-        setAnimalArray(getAnimals(uid))
-        setAnimalArray(dummyData)
+        const fetchData = async () => { 
+            aa = await getAnimals(uid)
+            if(aa == "redirect") {
+                return (
+                    window.location.href = '/signIn'
+                )
+            }
+            let temp = []
+            for(let i = 0; i < aa.length; i++) {
+                temp.push(aa[i])
+            }
+            setAnimalArray(temp)
+        }
+        fetchData()
+        
+        // pleasesetAnimalArray(dummyData)
     }, [])
 
     return (
@@ -42,14 +53,15 @@ export default function HomePage() {
                 <h1>Your Animals</h1>
                 <Button buttonText="Add New Animal" type="Link" link="/addAnimal" 
                     buttonStyle="link-button" buttonBox="link-button-box" textStyle="link-button-text"/>
-                <FlatList
+                <FlatList className="animalList"
                     // list={dummyData}
                     list={animalArray}
                     renderItem={(animal, idx) => (
                         <>
-                            <div class="item-box">
+                            <div className="item-box">
+                                <img className="dogImage" src={animal.pfp}/>
                                 <h2>{animal.name}</h2>
-                                <h4>Born on {format(animal.dateOfBirth, "MMMM do, yyyy")}</h4>
+                                <h4>Born on {format(new Date(animal.dob), "MMMM do, yyyy")}</h4>
                                 <h3>{animal.hoursTrained} Hours Trained</h3>
                             </div>
                         </>

@@ -6,21 +6,23 @@ import mongoose from "mongoose"
 
 
 
-async function getName(animalArray) {
 
-    const nameArray = []
+async function getAllElements(animalArray) {
+
+    const wholeArray = []
     const updatedAnimalArray = []
 
     for (const element of animalArray) {
         const animalData = await animalSchema.findOne(element).lean()
         if (animalData != null) {
-            nameArray.push(animalData.name)
+            const tempDate = new Date(animalData.dateOfBirth)
+            wholeArray.push({name: animalData.name, dob: tempDate, hoursTrained: animalData.hoursTrained, pfp: animalData.profilePicture})
             updatedAnimalArray.push(element)
         }
     }
 
-    return {nameArray, updatedAnimalArray}
-}   
+    return {wholeArray, updatedAnimalArray}
+}
 
 
 export default async function handler(req, res) {
@@ -33,17 +35,20 @@ export default async function handler(req, res) {
 
         try {
             await connectDB()
+
             const user = new mongoose.Types.ObjectId(authenticate._id)
             const userData = await userSchema.findOne(user).lean()
 
             const animalArray = userData.animalArray
+            
+            
+            let {wholeArray, updatedAnimalArray} = await getAllElements(animalArray)
 
-            let {nameArray, updatedAnimalArray} = await getName(animalArray)
 
-
+            console.log(wholeArray)
             await userSchema.updateOne({_id: user}, {animalArray: updatedAnimalArray})
-
-            return res.status(200).send(nameArray)
+            
+            return res.status(200).send(wholeArray)
 
         } catch (error) {
             await closeDB()
