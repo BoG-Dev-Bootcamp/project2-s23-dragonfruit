@@ -46,18 +46,18 @@ export default function HomePage() {
             
         }
         fetchData()
-        
-        // pleasesetAnimalArray(dummyData)
     }, [])
 
     return (
         <>
+            <div class="logout-button">
+                <Button buttonText="Log Out" type="Link" link="signIn"
+                    buttonStyle="link-button" buttonBox="link-button-box" textStyle="link-button-text"/>
+            </div>
             <div class="container-default">
                 <h1>Your Animals</h1>
                 <div className = "buttons">
                     <Button buttonText="Add New Animal" type="Link" link="/addAnimal" 
-                        buttonStyle="link-button" buttonBox="link-button-box" textStyle="link-button-text"/>
-                    <Button buttonText="Log Out" type="Link" link="signIn"
                         buttonStyle="link-button" buttonBox="link-button-box" textStyle="link-button-text"/>
                 </div>
                 <div>
