@@ -26,6 +26,7 @@ export default function addAnimal() {
     let res;
     
     const onSubmit = async (data) => {
+        /*
         res = await sendPost("/api/animal", data.name, data.hours, data.date, data.pfp, uid)
         if(res == "redirect") {
             console.log("redirect")
@@ -33,6 +34,18 @@ export default function addAnimal() {
                 window.location.href = '/signIn'
             )
         }
+        */
+        sendPost("/api/animal", data.name, data.hours, data.date, data.pfp, uid)
+            .then((res) => {
+                if (res == "redirect") {
+                    console.log("redirect")
+                    window.location.href = '/signIn'
+                } else {
+                    window.location.href = "/home"
+                }
+            }).catch((error) => {
+                return "There has been an error"
+            })
     }
 
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -41,10 +54,6 @@ export default function addAnimal() {
         const token = (Cookies.get('token'))
         uid = clientauth(token)
     })
-
-
-    
-
 
     return (
         <>
