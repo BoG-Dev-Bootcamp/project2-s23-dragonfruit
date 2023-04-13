@@ -34,11 +34,16 @@ export default function HomePage() {
                     window.location.href = '/signIn'
                 )
             }
-            let temp = []
-            for(let i = 0; i < aa.length; i++) {
-                temp.push(aa[i])
+            if (aa == "Null") {
+                setAnimalArray([])
+            } else {
+                let temp = []
+                for(let i = 0; i < aa.length; i++) {
+                    temp.push(aa[i])
+                }
+                setAnimalArray(temp)
             }
-            setAnimalArray(temp)
+            
         }
         fetchData()
         
@@ -49,8 +54,12 @@ export default function HomePage() {
         <>
             <div class="container-default">
                 <h1>Your Animals</h1>
-                <Button buttonText="Add New Animal" type="Link" link="/addAnimal" 
-                    buttonStyle="link-button" buttonBox="link-button-box" textStyle="link-button-text"/>
+                <div className = "buttons">
+                    <Button buttonText="Add New Animal" type="Link" link="/addAnimal" 
+                        buttonStyle="link-button" buttonBox="link-button-box" textStyle="link-button-text"/>
+                    <Button buttonText="Log Out" type="Link" link="signIn"
+                        buttonStyle="link-button" buttonBox="link-button-box" textStyle="link-button-text"/>
+                </div>
                 <div>
                     <FlatList className="animalList"
                         // list={dummyData}
