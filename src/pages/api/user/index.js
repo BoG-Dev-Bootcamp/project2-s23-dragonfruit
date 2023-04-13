@@ -23,7 +23,8 @@ export default async function handler(req, res) {
             const final = {
                 ...info,
                 ...userEmail,
-                password: hash
+                password: hash,
+                animalArray: []
             }
 
             if (old == null) {

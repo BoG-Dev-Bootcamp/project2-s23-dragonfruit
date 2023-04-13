@@ -131,7 +131,7 @@ body {
 }
 
 .item-box:hover {
-    background-color: lightblue;
+    background-color: #0088a9;
     width: 100%
 }
 
@@ -169,4 +169,8 @@ body {
 
 .item-box:hover .dogImage {
     opacity: 100%;
+}
+
+.buttons {
+    display: flex;
 }

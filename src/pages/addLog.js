@@ -74,7 +74,7 @@ export default function addLog() {
         uid = clientauth(token)
         const fetchData = async () => { 
             aa = await getAnimals(uid)
-            if(aa == "redirect") {
+            if(aa == "redirect") {https://www.princeton.edu/sites/default/files/styles/half_2x/public/images/2022/02/KOA_Nassau_2697x1517.jpg?itok=iQEwihUn
                 return (
                     window.location.href = '/signIn'
                 )
