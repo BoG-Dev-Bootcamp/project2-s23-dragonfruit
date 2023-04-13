@@ -4,9 +4,7 @@ import Link from "next/link"
 export default function Navbar() {
     return (
         <nav className = "nav">
-            <Link href="/home" className="title">
-                Home
-            </Link>
+            <Link href="/" className="title">Home</Link>
             <ul>
                 {/* <CustomLink href="/home">Account</CustomLink> */}
                 <CustomLink href="/addAnimal">Add a Friend</CustomLink>

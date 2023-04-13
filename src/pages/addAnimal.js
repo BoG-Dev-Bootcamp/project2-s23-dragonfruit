@@ -56,7 +56,7 @@ export default function addAnimal() {
         }
         if (res == "created") {
             setSuccess("Animal added!")
-            window.location.href = "/home"
+            window.location.href = "/"
         } else {
             setSuccess("Animal not created correctly")
         }

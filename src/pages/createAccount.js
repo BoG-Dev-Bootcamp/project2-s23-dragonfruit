@@ -87,7 +87,7 @@ export default function CreateAccount() {
                                                 (sendPost("api/user", firstName, lastName, email, password)
                                                     .then((response) => {
                                                         setErrorMsg("")
-                                                        window.location.href = '/home'
+                                                        window.location.href = '/'
                                                     }).catch((error) => {
                                                         setErrorMsg("This email address already has an account, you can Sign In instead")
                                                     }))

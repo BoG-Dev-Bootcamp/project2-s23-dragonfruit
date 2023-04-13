@@ -52,7 +52,7 @@ export default function SignIn() {
                                     .then((response) => {
                                         Cookies.set('token', response, {expires: 1/48, path:"/"})
                                         setErrorMsg("")
-                                        window.location.href = '/home'
+                                        window.location.href = '/'
                                     }).catch((error) => {
                                         console.log(error)
                                         setErrorMsg("Incorrect username or password")
