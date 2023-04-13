@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react"
-import Button from "./components/button"
 import axios from "axios"
 import { useForm, useController } from "react-hook-form"
 import clientauth from "./api/user/clientauth"
 import Cookies from "js-cookie"
-import Select from 'react-select';
-import { redirect } from "next/dist/server/api-utils"
+import ReactSearchBox from "react-search-box"
+React.useLayoutEffect = React.useEffect
+
 
 async function sendPost(url, date, description, hours, animal, pfp, uid) {
     
@@ -36,6 +36,7 @@ async function getAnimals(uid) {
 export default function addLog() {
     const[success, setSuccess] = useState("");
     const [animalArray, setAnimalArray] = useState([]);
+    const [ animalName, setAnimalName ] = useState("Animal Name");
     let res
     let uid
     const { register, handleSubmit, formState: { errors }, control, reset} = useForm();
@@ -50,7 +51,7 @@ export default function addLog() {
     }
     
     const onSubmit = async (data) => {
-        res = await sendPost("/api/training", data.date, data.description, data.hours, data.animal, data.pfp, uid)
+        res = await sendPost("/api/training", data.date, data.description, data.hours, animalName, data.pfp, uid)
         if(res == "redirect") {
             console.log("redirect")
             return (
@@ -66,10 +67,6 @@ export default function addLog() {
         reset()
     }
 
-    // const handleChange = (selectedOption) => {
-    //     console.log(`Option selected:`, selectedOption);
-    // }
-
     
     let aa = []
     useEffect( () => {
@@ -84,17 +81,13 @@ export default function addLog() {
             }
             let temp = []
             for(let i = 0; i < aa.length; i++) {
-                temp.push({value: aa[i], label: aa[i]})
+                temp.push({value: aa[i].name, label: aa[i].name})
             }
             setAnimalArray(temp)
         }
         fetchData()
     }, [])
 
-
-
-    //const { field } = useController({ name: 'animal', control });
-    //const { value: animalValue, onChange: animalOnChange, ...restAnimalField } = field;
 
     return (
         <>
@@ -123,23 +116,19 @@ export default function addLog() {
 
                         <div class="textbox-default-box">
                             <h3>Animal</h3>
-                            <input placeholder="Animal" type="text" {...register("animal", {required: true})} class="textbox-default"/>
+                            <ReactSearchBox
+                                placeholder={animalName}
+                                data={animalArray}
+                                onSelect={(record) => {
+                                    setAnimalName(record.item.value)
+                                }}
+                                className="textbox-default"
+                                inputBorderColor="black"
+                                inputBackgroundColor={"rgb(244,244,244)"}
+                            />
                             {errors.animal && <span class="error-text-small">This field is required</span>}
                         </div>
-                        {/* <div>
-                            <label>Select Animal</label>
-                            <Select
-                                className='select-input'
-                                placeholder="Select Animal"
-                                isClearable
-                                options={animalArray}
-                                value={animalValue ? animalArray.find(x => x.value === animalValue) : animalValue}
-                                onChange={option => animalOnChange(option ? option.value : option)}
-                                {...restAnimalField}
-                                {...register("animal", {required: true})}
-                            />
-                            {errors.animal && <p>{errors.animal.message}</p>}
-                        </div> */}
+
                         <div class="textbox-default-box">
                             <h3>Training Video</h3>
                             <input placeholder="www." type="text" {...register("pfp")} class="textbox-default"/>
