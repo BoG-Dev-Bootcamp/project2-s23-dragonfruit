@@ -70,7 +70,7 @@ export default function HomePage() {
                         }
                         display={{
                             grid: true,
-                            gridGap: "px",
+                            gridGap: "0px",
                         }}
                     />
                 </div>
