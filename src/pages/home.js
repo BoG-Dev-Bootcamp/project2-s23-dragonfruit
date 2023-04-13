@@ -3,10 +3,22 @@ import FlatList from "flatlist-react"
 import Button from "./components/button"
 import Cookies from "js-cookie"
 import clientauth from "./api/user/clientauth"
-// import { closeDB, connectDB } from "../../server/utils/db"
 import { format } from "date-fns"
+import axios from "axios"
+
+async function getAnimals(uid) {
+    const res = await axios.get("/api/user/userPagination", {
+        headers: {
+            'Authorization': 'Bearer ' + uid
+        }
+    })
+
+    return res.data
+}
 
 export default function HomePage() {
+    const [ animalArray, setAnimalArray ] = useState([])
+
     const dummyData = [
         {name: 'Bella', dateOfBirth: new Date(0), hoursTrained: 0},
         {name: 'Mia', dateOfBirth: new Date(0), hoursTrained: 0},
@@ -20,6 +32,8 @@ export default function HomePage() {
         if (uid === false) {
             window.location.href = "/signIn"
         }
+        setAnimalArray(getAnimals(uid))
+        setAnimalArray(dummyData)
     }, [])
 
     return (
@@ -29,7 +43,8 @@ export default function HomePage() {
                 <Button buttonText="Add New Animal" type="Link" link="/addAnimal" 
                     buttonStyle="link-button" buttonBox="link-button-box" textStyle="link-button-text"/>
                 <FlatList
-                    list={dummyData}
+                    // list={dummyData}
+                    list={animalArray}
                     renderItem={(animal, idx) => (
                         <>
                             <div class="item-box">
@@ -39,6 +54,9 @@ export default function HomePage() {
                             </div>
                         </>
                     )}
+                    renderWhenEmpty={() => 
+                        <h3 class="link-button-default">You haven't added any animals yet!</h3>
+                    }
                 />
             </div>
         </>
