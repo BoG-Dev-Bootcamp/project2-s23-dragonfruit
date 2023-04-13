@@ -84,7 +84,6 @@ export default function addAnimal() {
             <button type="submit" value="Submit">Add Friend!</button>
             
         </form>
-        <Button type="Link" link="/signIn" buttonText="Have an account? Sign In Instead" />
         </>
     )
 }

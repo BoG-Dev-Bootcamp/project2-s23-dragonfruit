@@ -12,7 +12,7 @@ export default function HomePage() {
     return (
         <>
             <h1>Your Animals</h1>
-            <Button buttonText="Add New Animal" />
+            <Button buttonText="Add New Animal" type="Link" link="/addAnimal"/>
             <FlatList
                 list={dummyData}
                 renderItem={(animal, idx) => (

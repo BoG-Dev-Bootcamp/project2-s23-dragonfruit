@@ -8,7 +8,6 @@ export default function clientauth(token) {
     const jwt = token
     
     try {
-        const key = "javainuse-secret-key"
         const decoded = decode(jwt)
         //const decoded = verify(jwt, key)
         //console.log("decoded: " + decoded)

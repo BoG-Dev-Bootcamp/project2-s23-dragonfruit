@@ -19,19 +19,15 @@ export default async function handler(req, res) {
             const info = {_id: user._id, firstName: user.firstName, lastName: user.lastName}
 
 
-
-
             if(user == null) {
                 res.status(400)
                 return res.send({message: "Not logged in"})
 
-            
             } else {
                 const result = await bcrypt.compare(password, user.password)
                 if (!result) {
                     res.status(403).send({message: "Incorrect Password!"})
-                } 
-
+                }
 
                 const token = sign({ admin: true, ...info}, process.env.SECRET, { expiresIn: '1800s' })
 

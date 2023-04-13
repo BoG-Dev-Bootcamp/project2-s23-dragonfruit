@@ -3,22 +3,27 @@ import trainingLogSchema from "../../../../server/mongodb/models/trainingLog.js"
 import userSchema from "../../../../server/mongodb/models/user.js"
 import animalSchema from "../../../../server/mongodb/models/animal.js"
 import { connectDB, closeDB } from "../../../../server/utils/db.js"
-import auth from "../user/auth.js"
+import clientauth from "../user/clientauth.js"
 
 export default async function handler(request, response) {
-    const authenticate = auth(request, response) 
+    const authenticate = clientauth(request.cookies.token) 
     console.log(authenticate._id)
 
+    if(authenticate == false) {
+        return res.send("redirect")
+    }
     if (request.method == "POST") {
         try {
 
             await connectDB()
 
+            console.log(request.body.animal)
+            const animalData = await AnimalSchema.findOne({name: request.body.animal}).lean()
             const trainingLogData = {
                 date: new Date(request.body.date),
                 description: request.body.description,
                 hours: request.body.hours,
-                animal: new mongoose.Types.ObjectId(request.body.animal),
+                animal: new mongoose.Types.ObjectId(animalData._id),
                 user: new mongoose.Types.ObjectId(authenticate._id),
                 // user: new mongoose.Types.ObjectId(request.body.user),
                 trainingLogVideo: request.body.trainingLogVideo,
@@ -89,6 +94,7 @@ export default async function handler(request, response) {
     } else {
         await closeDB()
         response.status(500)
+        console.log(error)
         return response.send("Something has gone wrong!");
     }
 }
